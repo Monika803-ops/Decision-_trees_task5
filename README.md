@@ -2,8 +2,20 @@
 # Heart Disease Prediction using Decision Tree and Random Forest
 
 ##  Project Overview
-This project uses **Decision Tree** and **Random Forest** classifiers to predict whether a patient is likely to have heart disease based on given features.  
-We also visualize the decision tree and show feature importance for the random forest model.
+This project applies **Decision Tree** and **Random Forest** machine learning algorithms to predict whether a patient is likely to have heart disease.  
+The dataset contains patient health metrics such as age, cholesterol, resting blood pressure, maximum heart rate, etc.  
+We visualize the decision tree and analyze feature importance for the random forest model.
+
+---
+
+##  Dataset
+The dataset `heart.csv` should be placed in the **project root folder**.  
+It contains features such as age, cholesterol, resting blood pressure, maximum heart rate, etc., and the target variable:
+
+- `0` → No Heart Disease  
+- `1` → Heart Disease  
+
+Example dataset source: [Kaggle - Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)
 
 ---
 
@@ -11,7 +23,7 @@ We also visualize the decision tree and show feature importance for the random f
 
 Make sure you have the following installed:
 
-- Python 3.8+  
+- Python 3.8+
 - pip (Python package manager)
 - Graphviz (for Decision Tree visualization)
 - Required Python libraries:
@@ -19,31 +31,23 @@ Make sure you have the following installed:
   pip install pandas numpy matplotlib seaborn scikit-learn graphviz
 ````
 
----
-Here’s the **step-by-step process** to perform this task from start to end, exactly based on your provided code:
 
----
 
-### **Step 1: Install Required Libraries**
-
-Make sure the following Python libraries are installed:
-
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn graphviz
-```
-
-Also install **Graphviz software** on your system (not just the Python package) because it's needed to render the decision tree.
+## Graphviz Installation
 
 **For Windows:**
 
 1. Download Graphviz installer from: [https://graphviz.org/download/](https://graphviz.org/download/)
 2. Install it.
-3. Add Graphviz `bin` folder path to your **System Environment Variables → Path** (e.g., `C:\Program Files\Graphviz\bin`).
+3. Add Graphviz `bin` folder path to your **System Environment Variables → Path**
+   Example: `C:\Program Files\Graphviz\bin`
 4. Restart your terminal or IDE.
 
 ---
 
-### **Step 2: Import Libraries**
+## Steps to Run the Project
+
+### 1️Import Libraries
 
 ```python
 import pandas as pd
@@ -57,36 +61,21 @@ from sklearn.metrics import accuracy_score
 import graphviz
 ```
 
----
-
-### **Step 3: Load Dataset**
+### 2️⃣ Load Dataset
 
 ```python
 df = pd.read_csv("heart.csv")
 ```
 
----
-
-### **Step 4: Separate Features and Target**
+### 3️⃣ Prepare Data
 
 ```python
 X = df.drop("target", axis=1)
 y = df["target"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
----
-
-### **Step 5: Split Data into Train & Test Sets**
-
-```python
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-```
-
----
-
-### **Step 6: Train Decision Tree Model**
+### 4️⃣ Decision Tree Model
 
 ```python
 dt_model = DecisionTreeClassifier(random_state=42)
@@ -95,9 +84,7 @@ y_pred_dt = dt_model.predict(X_test)
 print("Decision Tree Accuracy:", accuracy_score(y_test, y_pred_dt))
 ```
 
----
-
-### **Step 7: Visualize Decision Tree**
+### 5️⃣ Visualize Decision Tree
 
 ```python
 dot_data = export_graphviz(
@@ -110,11 +97,7 @@ graph = graphviz.Source(dot_data)
 graph.render("decision_tree")
 ```
 
-This saves a `decision_tree.pdf` or `.png` (depending on your Graphviz setup).
-
----
-
-### **Step 8: Train Limited Depth Decision Tree**
+### 6️⃣ Limited Depth Decision Tree
 
 ```python
 dt_model_limited = DecisionTreeClassifier(max_depth=4, random_state=42)
@@ -123,9 +106,7 @@ y_pred_limited = dt_model_limited.predict(X_test)
 print("Limited Depth Decision Tree Accuracy:", accuracy_score(y_test, y_pred_limited))
 ```
 
----
-
-### **Step 9: Train Random Forest Model**
+### 7️⃣ Random Forest Model
 
 ```python
 rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
@@ -134,9 +115,7 @@ y_pred_rf = rf_model.predict(X_test)
 print("Random Forest Accuracy:", accuracy_score(y_test, y_pred_rf))
 ```
 
----
-
-### **Step 10: Feature Importance (Random Forest)**
+### 8️⃣ Feature Importance
 
 ```python
 importances = rf_model.feature_importances_
@@ -147,9 +126,7 @@ feat_importance_df = pd.DataFrame({
 print(feat_importance_df)
 ```
 
----
-
-### **Step 11: Plot Feature Importance**
+### 9️⃣ Plot Feature Importance
 
 ```python
 plt.figure(figsize=(8,5))
@@ -158,9 +135,7 @@ plt.title("Feature Importance (Random Forest)")
 plt.show()
 ```
 
----
-
-### **Step 12: Cross-Validation**
+### 🔟 Cross-Validation
 
 ```python
 scores = cross_val_score(rf_model, X, y, cv=5)
@@ -170,7 +145,28 @@ print("Average CV Score:", scores.mean())
 
 ---
 
-If you want, I can also give you a **single ready-to-run .py file** that includes these steps in order. That way you just run it once and get all results.
+## 📊 Example Output
+
+**Decision Tree Accuracy:**
+
+```
+0.85
+```
+
+**Random Forest Accuracy:**
+
+```
+0.90
+```
+
+**Feature Importance Plot:**
+A bar chart showing which health features are most influential in prediction.
+
+---
 
 
 
+---
+
+
+```
