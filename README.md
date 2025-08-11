@@ -1,12 +1,10 @@
-Here’s how you can write the **detailed “Task 5” explanation** from start to end, including installing libraries, explaining the process, and adding the Random Forest output image.
 
----
 
 ## **Task 5 – Decision Trees, Ensemble Learning & Feature Importance**
 
 ### **1. Objective**
 
-In this task, we aimed to:
+In this task, I aimed to:
 
 * Train a **Decision Tree** model for heart disease prediction.
 * Limit the tree depth to compare performance.
@@ -156,4 +154,4 @@ Below is the **Random Forest output graph**:
 
 ---
 
-If you want, I can also prepare a **tree diagram output image** alongside this so your README has **both the decision tree & random forest graph**. That will make the documentation complete.
+
